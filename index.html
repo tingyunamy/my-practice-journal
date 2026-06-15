@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我的修行手帳 My Practice Journal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="side">
+    <div class="brand">
+      <span class="stamp">☸</span>
+      <b>My Practice Journal</b>
+      <small>我的修行手帳</small>
+    </div>
+    <nav>
+      <a href="#weekly">📿 本週定課</a>
+      <a href="#counting">🪷 功課模式</a>
+      <a href="#calendar">📅 年度足跡</a>
+      <a href="#reflection">🌙 禪風封底</a>
+    </nav>
+    <p class="side-note">Tracker 是鏡子，不是績效表。</p>
+  </aside>
+
+  <main class="page">
+    <section class="cover">
+      <div>
+        <p class="eyebrow">Weekly Buddhist Planner</p>
+        <h1>🪷 我的修行手帳</h1>
+        <p class="quote">別在別人眼中修行自己，日日回到方法，日日回到願心。</p>
+        <div class="date-line">
+          <label>週起始日 <input id="weekStart" type="date"></label>
+          <span id="weekRange"></span>
+        </div>
+      </div>
+      <div class="cover-card">
+        <div class="moon" id="moon">🌑</div>
+        <div class="percent" id="overallPercent">0%</div>
+        <div class="lotus" id="lotusLine">○ ○ ○ ○ ○</div>
+        <small>本週完成度</small>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button id="saveBtn">💾 儲存</button>
+      <button id="clearBtn">🧹 清除本週</button>
+      <button id="exportBtn">📤 匯出 CSV</button>
+      <label class="file-btn">📥 匯入 CSV <input id="importFile" type="file" accept=".csv" hidden></label>
+      <button id="sampleBtn">✨ 填入範例</button>
+    </section>
+
+    <section class="card vow">
+      <div class="card-title">
+        <span class="mini-icon">⭐</span>
+        <h2>本週願心</h2>
+      </div>
+      <textarea id="vow" placeholder="願以今日身心，安住方法，利益眾生。"></textarea>
+    </section>
+
+    <section id="weekly" class="card">
+      <div class="card-title between">
+        <div><span class="mini-icon">📿</span><h2>本週定課</h2></div>
+        <button id="addPractice">＋ 新增</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th><th>數量</th><th>備註</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="practiceBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="counting" class="dashboard">
+      <article class="card stat">
+        <div class="svg-icon lotus-svg"><svg viewBox="0 0 64 64"><path d="M32 50C18 50 9 41 6 30c10 0 19 5 26 20Z"/><path d="M32 50c14 0 23-9 26-20-10 0-19 5-26 20Z"/><path d="M32 49C22 39 22 25 32 12c10 13 10 27 0 37Z"/></svg></div>
+        <h3>蓮花進度</h3>
+        <p id="lotusBig">○ ○ ○ ○ ○</p>
+      </article>
+
+      <article class="card stat">
+        <div class="svg-icon mala-svg"><svg viewBox="0 0 64 64"><circle cx="32" cy="30" r="18"/><circle cx="32" cy="8" r="4"/><circle cx="15" cy="22" r="3"/><circle cx="49" cy="22" r="3"/><circle cx="32" cy="56" r="5"/></svg></div>
+        <h3>📿 念佛 10 萬佛號</h3>
+        <label>目標 <input id="nembutsuGoal" type="number" min="1"></label>
+        <div class="progress"><span id="nembutsuBar"></span></div>
+        <p id="nembutsuText">0 / 100000</p>
+      </article>
+
+      <article class="card stat">
+        <div class="svg-icon zazen-svg"><svg viewBox="0 0 64 64"><circle cx="32" cy="14" r="7"/><path d="M25 24h14l5 16H20l5-16Z"/><path d="M18 48c8-6 20-6 28 0"/><path d="M10 54h44"/></svg></div>
+        <h3>🧘 禪修時數</h3>
+        <div class="progress soft"><span id="meditationBar"></span></div>
+        <p id="meditationText">本週 0 小時</p>
+      </article>
+
+      <article class="card stat">
+        <h3>🤝 福田服務</h3>
+        <p class="big" id="volunteerHours">0 小時</p>
+        <small>義工服務、共修、布施善行都會被記錄在本週統計中。</small>
+      </article>
+    </section>
+
+    <section class="card">
+      <div class="card-title">
+        <span class="mini-icon">📊</span>
+        <h2>各項完成度</h2>
+      </div>
+      <div id="bars" class="bars"></div>
+    </section>
+
+    <section id="calendar" class="card">
+      <div class="card-title">
+        <span class="mini-icon">🔥</span>
+        <h2>年度修行足跡</h2>
+      </div>
+      <p class="hint">每天的勾選會形成淡淡足跡，像 GitHub Contributions，但它提醒的是「有沒有回來看心」。</p>
+      <div id="heatmap" class="heatmap"></div>
+      <div class="legend"><span>少</span><i class="lv0"></i><i class="lv1"></i><i class="lv2"></i><i class="lv3"></i><i class="lv4"></i><span>多</span></div>
+    </section>
+
+    <section class="card journal">
+      <div class="card-title">
+        <span class="mini-icon">📝</span>
+        <h2>修行札記</h2>
+      </div>
+      <textarea id="journal" placeholder="今天是否有安住方法？是否有看見自己的心？"></textarea>
+    </section>
+
+    <section id="reflection" class="zen-back">
+      <div class="zen-symbol">☸</div>
+      <h2>一念放下，萬般自在</h2>
+      <p>願消三障諸煩惱，願得智慧真明了。<br>普願罪障悉消除，世世常行菩薩道。</p>
+      <div class="reflection-grid">
+        <label>🌸 本週感恩<textarea id="gratitude"></textarea></label>
+        <label>🍂 本週覺察<textarea id="awareness"></textarea></label>
+        <label>⭐ 下週發願<textarea id="nextVow"></textarea></label>
+      </div>
+      <footer>🪷　🌙　🪷</footer>
+    </section>
+  </main>
+
+  <dialog id="dialog">
+    <form method="dialog" class="dialog-form">
+      <h3>新增定課</h3>
+      <label>圖示 <input id="newIcon" value="🌱" maxlength="3"></label>
+      <label>名稱 <input id="newName" placeholder="例：大悲咒"></label>
+      <label>單位 <input id="newUnit" placeholder="例：遍、分鐘、小時"></label>
+      <div class="dialog-actions">
+        <button value="cancel">取消</button>
+        <button id="confirmAdd">新增</button>
+      </div>
+    </form>
+  </dialog>
+
+  <template id="rowTemplate">
+    <tr>
+      <td class="name"></td>
+      <td><input type="checkbox" data-day="0"></td>
+      <td><input type="checkbox" data-day="1"></td>
+      <td><input type="checkbox" data-day="2"></td>
+      <td><input type="checkbox" data-day="3"></td>
+      <td><input type="checkbox" data-day="4"></td>
+      <td><input type="checkbox" data-day="5"></td>
+      <td><input type="checkbox" data-day="6"></td>
+      <td><input class="amount" type="number" min="0" placeholder="0"></td>
+      <td><input class="note" type="text" placeholder="備註"></td>
+      <td><button class="remove">×</button></td>
+    </tr>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
