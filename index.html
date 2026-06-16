@@ -15,7 +15,7 @@
     </div>
     <nav>
       <a href="#weekly">📿 本週定課</a>
-      <a href="#counting">🪷 功課模式</a>
+      <a href="#counting">🪷 年度累計</a>
       <a href="#calendar">📅 年度足跡</a>
       <a href="#reflection">🌙 禪風封底</a>
     </nav>
@@ -62,11 +62,12 @@
         <div><span class="mini-icon">📿</span><h2>本週定課</h2></div>
         <button id="addPractice">＋ 新增</button>
       </div>
+      <p class="hint">「每次預計數量」會乘上本週打勾天數，計入本週與年度累計。例如：念佛每次 1000 聲，本週勾 5 天＝本週 5000 聲。</p>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>項目</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th><th>數量</th><th>備註</th><th></th>
+              <th>項目</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th><th>每次預計數量</th><th>本週小計</th><th>備註</th><th></th>
             </tr>
           </thead>
           <tbody id="practiceBody"></tbody>
@@ -91,13 +92,13 @@
 
       <article class="card stat">
         <div class="svg-icon zazen-svg"><svg viewBox="0 0 64 64"><circle cx="32" cy="14" r="7"/><path d="M25 24h14l5 16H20l5-16Z"/><path d="M18 48c8-6 20-6 28 0"/><path d="M10 54h44"/></svg></div>
-        <h3>🧘 禪修時數</h3>
+        <h3>🧘 禪修年度累計</h3>
         <div class="progress soft"><span id="meditationBar"></span></div>
-        <p id="meditationText">本週 0 小時</p>
+        <p id="meditationText">今年 0 小時</p>
       </article>
 
       <article class="card stat">
-        <h3>🤝 福田服務</h3>
+        <h3>🤝 義工年度累計</h3>
         <p class="big" id="volunteerHours">0 小時</p>
         <small>義工服務、共修、布施善行都會被記錄在本週統計中。</small>
       </article>
@@ -106,7 +107,7 @@
     <section class="card">
       <div class="card-title">
         <span class="mini-icon">📊</span>
-        <h2>各項完成度</h2>
+        <h2>本週與年度累計</h2>
       </div>
       <div id="bars" class="bars"></div>
     </section>
@@ -116,7 +117,7 @@
         <span class="mini-icon">🔥</span>
         <h2>年度修行足跡</h2>
       </div>
-      <p class="hint">每天的勾選會形成淡淡足跡，像 GitHub Contributions，但它提醒的是「有沒有回來看心」。</p>
+      <p class="hint">每天的勾選會形成淡淡足跡；年度累計會統計今年所有已儲存週次。</p>
       <div id="heatmap" class="heatmap"></div>
       <div class="legend"><span>少</span><i class="lv0"></i><i class="lv1"></i><i class="lv2"></i><i class="lv3"></i><i class="lv4"></i><span>多</span></div>
     </section>
@@ -166,6 +167,7 @@
       <td><input type="checkbox" data-day="5"></td>
       <td><input type="checkbox" data-day="6"></td>
       <td><input class="amount" type="number" min="0" placeholder="0"></td>
+      <td class="subtotal">0</td>
       <td><input class="note" type="text" placeholder="備註"></td>
       <td><button class="remove">×</button></td>
     </tr>
